@@ -1,0 +1,4 @@
+exoTrain.csv
+*.exe
+*.lnk
+__pycache__/

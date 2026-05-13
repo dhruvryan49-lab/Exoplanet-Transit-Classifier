@@ -1,0 +1,12 @@
+"""
+Phase 1: Exoplanet Detection using 1D-CNN
+Framework: PyTorch
+Hardware: CPU-optimized (Intel i5)
+
+Objective: 
+1. Load Kepler light-curve data from 'exoTrain.csv' and 'exoTest.csv'.
+2. Preprocess: The first column is the label (2 for exoplanet, 1 for non-exoplanet). 
+3. Normalize flux values to zero mean and unit variance.
+4. Build a 1D-CNN with 2 Conv layers, MaxPool, and a Fully Connected layer.
+5. Implement a training loop with Binary Cross Entropy loss and track accuracy.
+"""
