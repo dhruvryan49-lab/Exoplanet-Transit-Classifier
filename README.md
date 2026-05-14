@@ -13,6 +13,17 @@ The primary bottleneck of the Kepler dataset is extreme class imbalance.
 * **Signal Extraction:** Implemented Savitzky-Golay filtering (window=101, polyorder=2) to extract underlying geometric transit trends from stochastic stellar noise prior to scaling.
 * **Network Design:** 3-layer 1D-CNN utilizing `MaxPool1d` to compress 3,197 temporal observation steps down to 49 spatial features.
 * **Loss Function Engineering:** Bypassed the zero-recall trap via a custom `BCEWithLogitsLoss` weight matrix.
+```mermaid
+graph TD
+    A[Client / Frontend] -->|POST /predict JSON Payload| B(FastAPI Server)
+    B --> C{Data Validation}
+    C -->|Pydantic: 3197 floats| D[Preprocessing Engine]
+    D -->|Savitzky-Golay Filter| E[Standard Scaler]
+    E -->|Normalized Tensor| F[TransitCNN PyTorch Model]
+    F -->|BCEWithLogitsLoss Weights| G[Sigmoid Activation]
+    G -->|Probability %| H[JSON Response]
+    H -->|Return| A
+```
 
 ## Hyperparameter Optimization Log
 To force the network to isolate the minority class without triggering systemic false positives, the loss penalty was tuned empirically:
